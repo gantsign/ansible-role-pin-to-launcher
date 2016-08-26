@@ -12,8 +12,8 @@
         createhome: yes
 
   roles:
-    - role: ansible-role-dockbarx-launcher
+    - role: ansible-role-pin-to-launcher
       users:
         - username: test_usr
-          docbarx_launcher_items:
+          pin_to_launcher_items:
             - 'test-app;/usr/share/applications/test-app.desktop'

@@ -27,7 +27,7 @@
     || { echo 'Error' ; exit 2; }
   with_subelements:
     - "{{ users }}"
-    - docbarx_launcher_items
+    - pin_to_launcher_items
   register: gconftool_result
   changed_when: 'gconftool_result.rc == 1'
   failed_when: 'gconftool_result.rc >= 2'

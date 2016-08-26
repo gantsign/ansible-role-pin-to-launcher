@@ -1,10 +1,10 @@
-Ansible Role: DockbarX Launcher
-===============================
+Ansible Role: Pin to Launcher
+=============================
 
-[![Build Status](https://travis-ci.org/gantsign/ansible-role-dockbarx-launcher.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-dockbarx-launcher)
-[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.dockbarx--launcher-blue.svg)](https://galaxy.ansible.com/gantsign/dockbarx-launcher)
+[![Build Status](https://travis-ci.org/gantsign/ansible-role-pin-to-launcher.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-pin-to-launcher)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.pin--to--launcher-blue.svg)](https://galaxy.ansible.com/gantsign/pin-to-launcher)
 
-Role to add items to the DockbarX launcher.
+Role to add items to the desktop application launcher.
 
 Requirements
 ------------
@@ -18,7 +18,7 @@ The following variables will change the behavior of this role (default values
 are shown below):
 
 ```yaml
-# Users with items to add to the DockbarX launcher
+# Users with items to add to the desktop application launcher
 users: []
 ```
 
@@ -28,10 +28,10 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-    - role: gantsign.dockbarx-launcher
+    - role: gantsign.pin-to-launcher
       users:
         - username: vagrant
-          docbarx_launcher_items:
+          pin_to_launcher_items:
             - 'exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop'
             - 'thunar;/usr/share/applications/Thunar-folder-handler.desktop'
 ```
