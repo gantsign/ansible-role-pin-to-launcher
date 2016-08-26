@@ -1,0 +1,19 @@
+---
+- hosts: all
+  remote_user: root
+
+  pre_tasks:
+    - name: create test_usr
+      become: yes
+      user:
+        name: test_usr
+        state: present
+        home: /home/test_usr
+        createhome: yes
+
+  roles:
+    - role: ansible-role-dockbarx-launcher
+      users:
+        - username: test_usr
+          docbarx_launcher_items:
+            - 'test-app;/usr/share/applications/test-app.desktop'
