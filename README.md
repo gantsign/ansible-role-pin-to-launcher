@@ -24,6 +24,7 @@ Users are specified as follows:
 ```yaml
 - username: # Unix username
   pin_to_launcher:
+    launcher: # Desktop application launcher to pin applications to (currently supported: 'dockbarx')
     applications:
       - app_id: # ID to use for the application (chosen by user, a-Z and '-' permitted)
         desktop_file: # Absolute path to application `.desktop` file
@@ -39,6 +40,7 @@ Example Playbook
       users:
         - username: vagrant
           pin_to_launcher:
+            launcher: dockbarx
             applications:
               - app_id: exo-terminal-emulator
                 desktop_file: /usr/share/applications/exo-terminal-emulator.desktop
