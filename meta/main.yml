@@ -1,0 +1,17 @@
+galaxy_info:
+  author: John Freeman
+  description: Role for pinning applications to the desktop application launcher.
+  company: GantSign Ltd.
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - wily
+    - xenial
+  galaxy_tags:
+    - dockbar
+    - dockbarx
+    - launcher
+dependencies: []

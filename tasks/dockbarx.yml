@@ -1,0 +1,38 @@
+---
+- name: install gconf2
+  become: yes
+  apt:
+    name: gconf2
+    state: present
+  with_subelements:
+    - "{{ users }}"
+    - pin_to_launcher.applications
+    - skip_missing: yes
+  when: item.0.pin_to_launcher and item.0.pin_to_launcher.launcher == 'dockbarx'
+
+- name: install pin2dockbarx
+  become: yes
+  template:
+    src: pin2dockbarx.sh.j2
+    dest: "/usr/local/bin/pin2dockbarx"
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
+  with_subelements:
+    - "{{ users }}"
+    - pin_to_launcher.applications
+    - skip_missing: yes
+  when: item.0.pin_to_launcher and item.0.pin_to_launcher.launcher == 'dockbarx'
+
+- name: add applications to dockbarx
+  become: yes
+  become_user: "{{ item.0.username }}"
+  command: "pin2dockbarx '{{ item.1.app_id }}' '{{ item.1.desktop_file }}'"
+  with_subelements:
+    - "{{ users }}"
+    - pin_to_launcher.applications
+    - skip_missing: yes
+  when: item.0.pin_to_launcher and item.0.pin_to_launcher.launcher == 'dockbarx'
+  register: pin2dockbarx_result
+  changed_when: 'pin2dockbarx_result.rc == 0'
+  failed_when: 'pin2dockbarx_result.rc >= 2'
