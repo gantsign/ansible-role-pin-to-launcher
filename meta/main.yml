@@ -1,6 +1,6 @@
 galaxy_info:
   author: John Freeman
-  description: Role for adding items to the desktop application launcher.
+  description: Role for pinning applications to the desktop application launcher.
   company: GantSign Ltd.
   license: MIT
   min_ansible_version: 1.9

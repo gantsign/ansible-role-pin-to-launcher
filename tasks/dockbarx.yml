@@ -1,35 +1,27 @@
 ---
-# Configure DockbarX launcher
 - name: install gconf2
   become: yes
   apt:
     name: gconf2
     state: present
 
-- name: add launchers to dockbarx
-  shell: |
-    new_launcher='{{ item.1 }}'
+- name: install pin2dockbarx
+  become: yes
+  template:
+    src: pin2dockbarx.sh.j2
+    dest: "/usr/local/bin/pin2dockbarx"
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
 
-    # Get the current list of launchers
-    existing_launchers=$(gconftool-2 --get /apps/dockbarx/launchers 2> /dev/null \
-      | grep --color=never '^\[' || echo "[]")
-
-    # If the launcher is already in the list exit successfully here
-    echo "$existing_launchers" | grep -P "[\[,]${new_launcher}[\],]" && { echo 'No changes' ; exit 0; }
-
-    # Append the new launcher to the end of the list
-    new_launchers=$(echo "$existing_launchers" | sed "s:\]$:,${new_launcher}\]:" | sed "s:^\[,:\[:")
-
-    # Update the list of launchers
-    gconftool-2 --type list --list-type=string \
-      --set /apps/dockbarx/launchers "$new_launchers" \
-    && { echo 'Changes applied' ; exit 1; } \
-    || { echo 'Error' ; exit 2; }
-  with_subelements:
-    - "{{ users }}"
-    - pin_to_launcher_items
-  register: gconftool_result
-  changed_when: 'gconftool_result.rc == 1'
-  failed_when: 'gconftool_result.rc >= 2'
+- name: add applications to dockbarx
   become: yes
   become_user: "{{ item.0.username }}"
+  command: "pin2dockbarx '{{ item.1.app_id }}' '{{ item.1.desktop_file }}'"
+  with_subelements:
+    - "{{ users }}"
+    - pin_to_launcher.applications
+    - skip_missing: yes
+  register: pin2dockbarx_result
+  changed_when: 'pin2dockbarx_result.rc == 0'
+  failed_when: 'pin2dockbarx_result.rc >= 2'

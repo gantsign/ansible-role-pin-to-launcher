@@ -15,5 +15,10 @@
     - role: ansible-role-pin-to-launcher
       users:
         - username: test_usr
-          pin_to_launcher_items:
-            - 'test-app;/usr/share/applications/test-app.desktop'
+          pin_to_launcher:
+            applications:
+              - app_id: test-app
+                desktop_file: /usr/share/applications/test-app.desktop
+              - app_id: test-app2
+                desktop_file: /usr/share/applications/test-app2.desktop
+        - username: test_usr2

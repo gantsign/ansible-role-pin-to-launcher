@@ -1,10 +1,7 @@
 Ansible Role: Pin to Launcher
 =============================
 
-[![Build Status](https://travis-ci.org/gantsign/ansible-role-pin-to-launcher.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-pin-to-launcher)
-[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.pin--to--launcher-blue.svg)](https://galaxy.ansible.com/gantsign/pin-to-launcher)
-
-Role to add items to the desktop application launcher.
+Role to pin applications to the desktop application launcher.
 
 Requirements
 ------------
@@ -18,8 +15,18 @@ The following variables will change the behavior of this role (default values
 are shown below):
 
 ```yaml
-# Users with items to add to the desktop application launcher
+# Users with applications to pin to the desktop application launcher
 users: []
+```
+
+Users are specified as follows:
+
+```yaml
+- username: # Unix username
+  pin_to_launcher:
+    applications:
+      - app_id: # ID to use for the application (chosen by user, a-Z and '-' permitted)
+        desktop_file: # Absolute path to application `.desktop` file
 ```
 
 Example Playbook
@@ -31,9 +38,12 @@ Example Playbook
     - role: gantsign.pin-to-launcher
       users:
         - username: vagrant
-          pin_to_launcher_items:
-            - 'exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop'
-            - 'thunar;/usr/share/applications/Thunar-folder-handler.desktop'
+          pin_to_launcher:
+            applications:
+              - app_id: exo-terminal-emulator
+                desktop_file: /usr/share/applications/exo-terminal-emulator.desktop
+              - app_id: Thunar
+                desktop_file: /usr/share/applications/Thunar-folder-handler.desktop
 ```
 
 More Roles From GantSign
