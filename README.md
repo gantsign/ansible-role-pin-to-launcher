@@ -1,6 +1,8 @@
 Ansible Role: Pin to Launcher
 =============================
 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-pin-to-launcher/master/LICENSE)
+
 Role to pin applications to the desktop application launcher.
 
 Requirements
