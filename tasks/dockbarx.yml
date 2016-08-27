@@ -6,9 +6,9 @@
     state: present
   with_subelements:
     - "{{ users }}"
-    - pin_to_launcher.applications
+    - pin_to_launcher.favorites
     - skip_missing: yes
-  when: item.0.pin_to_launcher and item.0.pin_to_launcher.launcher == 'dockbarx'
+  when: item.0.pin_to_launcher is defined and item.0.pin_to_launcher.launcher == 'dockbarx' and item.1.application is defined
 
 - name: install pin2dockbarx
   become: yes
@@ -20,19 +20,19 @@
     mode: 'u=rwx,go=rx'
   with_subelements:
     - "{{ users }}"
-    - pin_to_launcher.applications
+    - pin_to_launcher.favorites
     - skip_missing: yes
-  when: item.0.pin_to_launcher and item.0.pin_to_launcher.launcher == 'dockbarx'
+  when: item.0.pin_to_launcher is defined and item.0.pin_to_launcher.launcher == 'dockbarx' and item.1.application is defined
 
 - name: add applications to dockbarx
   become: yes
   become_user: "{{ item.0.username }}"
-  command: "pin2dockbarx '{{ item.1.app_id }}' '{{ item.1.desktop_file }}'"
+  command: "pin2dockbarx '{{ item.1.application | regex_replace('(.*)\\.desktop$', '\\1') }}' '/usr/share/applications/{{ item.1.application }}'"
   with_subelements:
     - "{{ users }}"
-    - pin_to_launcher.applications
+    - pin_to_launcher.favorites
     - skip_missing: yes
-  when: item.0.pin_to_launcher and item.0.pin_to_launcher.launcher == 'dockbarx'
+  when: item.0.pin_to_launcher is defined and item.0.pin_to_launcher.launcher == 'dockbarx' and item.1.application is defined
   register: pin2dockbarx_result
   changed_when: 'pin2dockbarx_result.rc == 0'
   failed_when: 'pin2dockbarx_result.rc >= 2'
