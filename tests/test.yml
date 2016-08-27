@@ -18,3 +18,10 @@
         - application: test-app.desktop
         - application: test-app2.desktop
         - {}
+    - role: ansible-role-pin-to-launcher
+      pin_to_launcher: unity
+      pin_to_launcher_favorites:
+        - application: test-app3.desktop
+        - application: test-app4.desktop
+        - unity: running-apps
+        - {}

@@ -1,0 +1,21 @@
+---
+- name: install libglib2.0-bin
+  become: yes
+  apt:
+    name: libglib2.0-bin
+    state: present
+
+- name: write unity launcher config
+  become: yes
+  template:
+    src: launcher.gschema.override.j2
+    dest: "{{ pin_to_launcher_glib_schemas_directory }}/20_ansible_launcher.gschema.override"
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+  register: launcher_config
+
+- name: apply glib schemas changes
+  become: yes
+  command: "/usr/bin/glib-compile-schemas {{ pin_to_launcher_glib_schemas_directory }}"
+  when: launcher_config.changed

@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+
+{% set first_fav = True %}
+[com.canonical.Unity.Launcher]
+{# Using comments to suppress whitespace #}
+favorites = [{#
+#}{% for favourite in pin_to_launcher_favorites %}{#
+
+    #}{% if favourite.application is defined %}{#
+        #}{% if not first_fav %}, {% endif %}{% set first_fav = False %}{#
+        #}'application://{{ favourite.application }}'{#
+    #}{% endif %}{#
+
+    #}{% if favourite.unity is defined %}{#
+        #}{% if not first_fav %}, {% endif %}{% set first_fav = False %}{#
+        #}'unity://{{ favourite.unity }}'{#
+    #}{% endif %}{#
+
+#}{% endfor %}]
