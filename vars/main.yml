@@ -1,2 +1,6 @@
 ---
-# vars file for pin-to-launcher
+# Temporary directory to store scripts
+pin_to_launcher_tmp_dir: "{{ ansible_env.HOME + '/.ansible/tmp' }}"
+
+# Location of script for configuring DockbarX
+pin_to_launcher_dockbarx_configuration_script: "{{ pin_to_launcher_tmp_dir }}/configure-dockbarx-launcher.sh"

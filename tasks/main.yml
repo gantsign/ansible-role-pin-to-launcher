@@ -1,3 +1,4 @@
 ---
 
 - include: dockbarx.yml
+  when: pin_to_launcher == 'dockbarx'
