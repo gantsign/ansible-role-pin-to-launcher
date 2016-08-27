@@ -1,0 +1,90 @@
+#!/usr/bin/python
+
+# {{ ansible_managed }}
+
+from __future__ import print_function
+import sys
+import subprocess
+import re
+
+def print_err(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
+def print_invalid_arguments():
+    print_err('Invalid arguments')
+    print('Usage:')
+    print('    pin2dockbarx APP_ID DESKTOP_FILE_PATH')
+    print("    e.g. pin2dockbarx myapp '/usr/share/applications/myapp.desktop'")
+
+def main():
+    if len(sys.argv) < 3:
+        print_invalid_arguments()
+        sys.exit(2)
+
+    app_id = sys.argv[1]
+
+    desktop_file = sys.argv[2]
+
+    new_launcher = app_id + ';' + desktop_file
+
+    # Get the current list of pinned applications
+    try:
+        existing_launchers_str = subprocess.check_output(
+            ['gconftool-2',
+             '--get',
+             '/apps/dockbarx/launchers'],
+            stderr=subprocess.STDOUT)
+
+        existing_launchers_str = existing_launchers_str.strip()
+
+        if re.match(r'^\[(.+)\]$', existing_launchers_str):
+            print('Currently pinned applications:', existing_launchers_str)
+            print('')
+
+            # Parse string to list launchers
+            existing_launchers = re.sub(r'^\[(.*)\]$', r'\1',
+                                        existing_launchers_str).split(',')
+        else:
+            print('Currently pinned applications: []')
+            print('')
+
+            existing_launchers = []
+
+    except subprocess.CalledProcessError as err:
+        print_err(err.output)
+        existing_launchers = []
+
+    # If an application is already in the list fail with exit code 1
+    if new_launcher in existing_launchers:
+        print_err('Application already pinned.')
+        sys.exit(1)
+
+    # Append the new launcher to the end of the list
+    new_launchers = list(existing_launchers)
+    new_launchers.append(new_launcher)
+    new_launchers_str = '[' + ','.join(new_launchers) + ']'
+
+    print('New list of applications:', new_launchers_str)
+    print('')
+
+    try:
+        subprocess.check_output(
+            ['gconftool-2',
+             '--type',
+             'list',
+             '--list-type=string',
+             '--set',
+             '/apps/dockbarx/launchers',
+             new_launchers_str],
+            stderr=subprocess.STDOUT)
+
+        print('Changes applied.')
+        sys.exit(0)
+
+    except subprocess.CalledProcessError as err:
+        print_err(err.output)
+        print_err('Unable to apply changes')
+        sys.exit(3)
+
+if __name__ == "__main__":
+    main()

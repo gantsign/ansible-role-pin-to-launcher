@@ -13,7 +13,7 @@
 - name: install pin2dockbarx
   become: yes
   template:
-    src: pin2dockbarx.sh.j2
+    src: pin2dockbarx.py.j2
     dest: "/usr/local/bin/pin2dockbarx"
     owner: root
     group: root
