@@ -1,6 +1,7 @@
 ---
-# The desktop application launcher to pin applications to (currently supported: 'dockbarx')
-pin_to_launcher:
+# The desktop application launcher to pin applications to:
+# (currently supported: 'unity', dockbarx')
+pin_to_launcher: unity
 
 # The favorite applications to pin
 pin_to_launcher_favorites: []

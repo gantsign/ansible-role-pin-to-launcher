@@ -2,3 +2,6 @@
 
 - include: dockbarx.yml
   when: pin_to_launcher == 'dockbarx'
+
+- include: unity.yml
+  when: pin_to_launcher == 'unity'

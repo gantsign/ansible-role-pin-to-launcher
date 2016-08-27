@@ -15,8 +15,9 @@ The following variables will change the behavior of this role (default values
 are shown below):
 
 ```yaml
-# The desktop application launcher to pin applications to (currently supported: 'dockbarx')
-pin_to_launcher:
+# The desktop application launcher to pin applications to:
+# (currently supported: 'unity', dockbarx')
+pin_to_launcher: unity
 
 # The favorite applications to pin
 pin_to_launcher_favorites: []
@@ -26,11 +27,50 @@ Favorites are specified as follows:
 
 ```yaml
 pin_to_launcher_favorites:
-  - application: # the file name of the .desktop file in /usr/share/applications/
+  - application: # The file name of a .desktop file in /usr/share/applications/
 ```
 
 Example Playbook
 ----------------
+
+### Example Unity Playbook
+
+Unity is the default desktop on Ubuntu.
+
+```yaml
+- hosts: servers
+  roles:
+    - role: gantsign.pin-to-launcher
+      pin_to_launcher: unity
+      pin_to_launcher_favorites:
+        # You'll probably need these apps pinned when using Unity.
+        - application: ubiquity.desktop # The application search/menu
+        - application: org.gnome.Nautilus.desktop # The file browser
+        - application: ubuntu-software-center.desktop # Ubuntu software center
+        - application: unity-control-center.desktop # System settings
+        
+        # Pin the applications of your choice.
+        # Tip: run `gsettings set com.canonical.Unity.Launcher favorites` to
+        # see the apps you currently have pinned.
+        - application: exo-terminal-emulator.desktop
+
+        # The 'unity' favorites are not apps as such, but are placeholders in
+        # the Ubuntu launcher.
+        #
+        # You can reorder the items below, but be don't omit them unless you
+        # know what you're doing.
+        #
+        # These can be omitted if you're using DockbarX, but they'll be ignored
+        # anyway.
+        - unity: running-apps
+        - unity: expo-icon
+        - unity: devices
+```
+
+### Example DockbarX Playbook
+
+DockbarX is a popular dockbar that has integration with the Xfce4 desktop.
+
 
 ```yaml
 - hosts: servers

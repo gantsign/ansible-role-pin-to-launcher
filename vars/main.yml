@@ -4,3 +4,6 @@ pin_to_launcher_tmp_dir: "{{ ansible_env.HOME + '/.ansible/tmp' }}"
 
 # Location of script for configuring DockbarX
 pin_to_launcher_dockbarx_configuration_script: "{{ pin_to_launcher_tmp_dir }}/configure-dockbarx-launcher.sh"
+
+# Directory where GLib schemas are located
+pin_to_launcher_glib_schemas_directory: /usr/share/glib-2.0/schemas
