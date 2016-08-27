@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# {{ ansible_managed }}
+
+new_launchers="[\
+{% for favourite in pin_to_launcher_favorites %}
+{% if favourite.application is defined %}
+,{{ favourite.application | regex_replace('(.*)\\.desktop$', '\\1') }}\
+;/usr/share/applications/{{ favourite.application }}\
+{% endif %}
+{% endfor %}
+]"
+
+# Strip leading comma
+if [[ $new_launchers == '[,'* ]]
+then
+  new_launchers="[${new_launchers#[,}"
+fi
+
+# Get the current list of pinned applications
+existing_launchers=$(gconftool-2 --direct \
+    --config-source xml:readwrite:/etc/gconf/gconf.xml.defaults \
+    --get /apps/dockbarx/launchers 2> /dev/null)
+
+echo "Currently pinned applications: $existing_launchers"
+echo ''
+
+if [[ "$new_launchers" == "$existing_launchers" ]]
+then
+  echo 'No changes.' 1>&2
+  exit 1
+fi
+
+echo "New list of applications: $new_launchers"
+echo ''
+
+# Set the list of launchers
+if gconftool-2 --direct \
+               --config-source xml:readwrite:/etc/gconf/gconf.xml.defaults \
+               --type list --list-type=string \
+               --set /apps/dockbarx/launchers "$new_launchers"; then
+
+    echo 'Changes applied'
+    exit 0
+else
+    echo 'Unable to apply changes' 1>&2
+    exit 3
+fi

@@ -13,21 +13,8 @@
 
   roles:
     - role: ansible-role-pin-to-launcher
-      users:
-        - username: test_usr
-          pin_to_launcher:
-            launcher: dockbarx
-            applications:
-              - app_id: test-app
-                desktop_file: /usr/share/applications/test-app.desktop
-              - app_id: test-app2
-                desktop_file: /usr/share/applications/test-app2.desktop
-        - username: test_usr2
-          pin_to_launcher:
-            launcher: unsupported
-            applications:
-              - app_id: test-app
-                desktop_file: /usr/share/applications/test-app.desktop
-              - app_id: test-app2
-                desktop_file: /usr/share/applications/test-app2.desktop
-        - username: test_usr3
+      pin_to_launcher: dockbarx
+      pin_to_launcher_favorites:
+        - application: test-app.desktop
+        - application: test-app2.desktop
+        - {}

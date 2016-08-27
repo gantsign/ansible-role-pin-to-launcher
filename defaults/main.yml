@@ -1,3 +1,6 @@
 ---
-# Users with applications to pin to the desktop application launcher
-users: []
+# The desktop application launcher to pin applications to (currently supported: 'dockbarx')
+pin_to_launcher:
+
+# The favorite applications to pin
+pin_to_launcher_favorites: []

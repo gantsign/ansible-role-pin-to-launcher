@@ -15,19 +15,18 @@ The following variables will change the behavior of this role (default values
 are shown below):
 
 ```yaml
-# Users with applications to pin to the desktop application launcher
-users: []
+# The desktop application launcher to pin applications to (currently supported: 'dockbarx')
+pin_to_launcher:
+
+# The favorite applications to pin
+pin_to_launcher_favorites: []
 ```
 
-Users are specified as follows:
+Favorites are specified as follows:
 
 ```yaml
-- username: # Unix username
-  pin_to_launcher:
-    launcher: # Desktop application launcher to pin applications to (currently supported: 'dockbarx')
-    applications:
-      - app_id: # ID to use for the application (chosen by user, a-Z and '-' permitted)
-        desktop_file: # Absolute path to application `.desktop` file
+pin_to_launcher_favorites:
+  - application: # the file name of the .desktop file in /usr/share/applications/
 ```
 
 Example Playbook
@@ -37,15 +36,10 @@ Example Playbook
 - hosts: servers
   roles:
     - role: gantsign.pin-to-launcher
-      users:
-        - username: vagrant
-          pin_to_launcher:
-            launcher: dockbarx
-            applications:
-              - app_id: exo-terminal-emulator
-                desktop_file: /usr/share/applications/exo-terminal-emulator.desktop
-              - app_id: Thunar
-                desktop_file: /usr/share/applications/Thunar-folder-handler.desktop
+      pin_to_launcher: dockbarx
+      pin_to_launcher_favorites:
+        - application: exo-terminal-emulator.desktop
+        - application: Thunar-folder-handler.desktop
 ```
 
 More Roles From GantSign
