@@ -2,20 +2,16 @@
 
 # {{ ansible_managed }}
 
+{% set first_app = True %}
 new_launchers="[\
 {% for favourite in pin_to_launcher_favorites %}
 {% if favourite.application is defined %}
-,{{ favourite.application | regex_replace('(.*)\\.desktop$', '\\1') }}\
+{% if not first_app %},{% endif %}{% set first_app = False %}\
+{{ favourite.application | regex_replace('(.*)\\.desktop$', '\\1') }}\
 ;/usr/share/applications/{{ favourite.application }}\
 {% endif %}
 {% endfor %}
 ]"
-
-# Strip leading comma
-if [[ $new_launchers == '[,'* ]]
-then
-  new_launchers="[${new_launchers#[,}"
-fi
 
 # Get the current list of pinned applications
 existing_launchers=$(gconftool-2 --direct \
