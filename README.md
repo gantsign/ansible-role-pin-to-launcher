@@ -9,7 +9,23 @@ Role to pin applications to the desktop application launcher.
 Requirements
 ------------
 
+* Ansible >= 1.9
+
 * Ubuntu
+
+    * Wily (15.10)
+    * Note: other Ubuntu versions are likely to work but have not been tested.
+
+* A supported launcher
+
+    * [Unity](https://unity.ubuntu.com/)
+
+        * The default desktop installed with Ubuntu.
+
+    * [DockbarX](https://github.com/M7S/dockbarx)
+
+        * An optional install that's compatible with the
+          [XUbuntu](http://xubuntu.org/)/[Xfce4](https://www.xfce.org/) desktop.
 
 Role Variables
 --------------
@@ -33,8 +49,8 @@ pin_to_launcher_favorites:
   - application: # The file name of a .desktop file in /usr/share/applications/
 ```
 
-Example Playbook
-----------------
+Example Playbooks
+-----------------
 
 ### Example Unity Playbook
 
@@ -47,15 +63,18 @@ Unity is the default desktop on Ubuntu.
       pin_to_launcher: unity
       pin_to_launcher_favorites:
         # You'll probably need these apps pinned when using Unity.
-        - application: ubiquity.desktop # The application search/menu
-        - application: org.gnome.Nautilus.desktop # The file browser
-        - application: ubuntu-software-center.desktop # Ubuntu software center
-        - application: unity-control-center.desktop # System settings
+        - application: 'ubiquity.desktop' # The application search/menu
+        - application: 'org.gnome.Nautilus.desktop' # The file browser
+        # The following two apps are less frequently used so you may want to put
+        # them below your other apps.
+        - application: 'ubuntu-software-center.desktop' # Ubuntu software center
+        - application: 'unity-control-center.desktop' # System settings
 
-        # Pin the applications of your choice.
-        # Tip: run `gsettings set com.canonical.Unity.Launcher favorites` to
+        # Pin the applications of your choice below.
+        #
+        # Tip: run `gsettings get com.canonical.Unity.Launcher favorites` to
         # see the apps you currently have pinned.
-        - application: exo-terminal-emulator.desktop
+        - application: google-chrome.desktop
 
         # The 'unity' favorites are not apps as such, but are placeholders in
         # the Ubuntu launcher.
@@ -72,8 +91,8 @@ Unity is the default desktop on Ubuntu.
 
 ### Example DockbarX Playbook
 
-DockbarX is a popular dockbar that has integration with the Xfce4 desktop.
-
+DockbarX is a popular dockbar that has integration with the Xfce4 desktop. To
+use this you have to [install DockbarX first](https://github.com/M7S/dockbarx).
 
 ```yaml
 - hosts: servers
@@ -81,6 +100,11 @@ DockbarX is a popular dockbar that has integration with the Xfce4 desktop.
     - role: gantsign.pin-to-launcher
       pin_to_launcher: dockbarx
       pin_to_launcher_favorites:
+        # There are no applications pinned by default with DockbarX, so add
+        # whatever apps you want here.
+        #
+        # Tip: run `gconftool-2 --get /apps/dockbarx/launchers` to see what apps
+        # you currently have pinned.
         - application: exo-terminal-emulator.desktop
         - application: Thunar-folder-handler.desktop
 ```
