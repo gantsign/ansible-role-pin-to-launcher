@@ -1,6 +1,7 @@
 Ansible Role: Pin to Launcher
 =============================
 
+[![Build Status](https://travis-ci.org/gantsign/ansible-role-pin-to-launcher.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-pin-to-launcher)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-pin-to-launcher/master/LICENSE)
 
 Role to pin applications to the desktop application launcher.
@@ -50,7 +51,7 @@ Unity is the default desktop on Ubuntu.
         - application: org.gnome.Nautilus.desktop # The file browser
         - application: ubuntu-software-center.desktop # Ubuntu software center
         - application: unity-control-center.desktop # System settings
-        
+
         # Pin the applications of your choice.
         # Tip: run `gsettings set com.canonical.Unity.Launcher favorites` to
         # see the apps you currently have pinned.
