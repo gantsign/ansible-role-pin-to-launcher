@@ -17,6 +17,7 @@
       pin_to_launcher_favorites:
         - application: test-app.desktop
         - application: test-app2.desktop
+          application_id: test-id
         - {}
     - role: ansible-role-pin-to-launcher
       pin_to_launcher: unity

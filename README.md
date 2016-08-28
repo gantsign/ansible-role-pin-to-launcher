@@ -48,6 +48,7 @@ Favorites are specified as follows:
 ```yaml
 pin_to_launcher_favorites:
   - application: # The file name of a .desktop file in /usr/share/applications/
+    application_id: # DockbarX specific (StartupWMClass or executable file name)
   - unity: # Unity specific (e.g. 'running-apps', 'expo-icon' or 'devices').
 ```
 
@@ -109,6 +110,11 @@ use this you have to [install DockbarX first](https://github.com/M7S/dockbarx).
         # you currently have pinned.
         - application: exo-terminal-emulator.desktop
         - application: Thunar-folder-handler.desktop
+          # If your application isn't grouped with its launcher it may help to
+          # specify the `application_id`; this is either the `StartupWMClass`
+          # (if one is present in the `.desktop` file), or the file name of the
+          # application executable.
+          application_id: Thunar
 ```
 
 More Roles From GantSign
