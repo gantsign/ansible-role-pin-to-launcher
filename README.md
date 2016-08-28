@@ -47,6 +47,7 @@ Favorites are specified as follows:
 ```yaml
 pin_to_launcher_favorites:
   - application: # The file name of a .desktop file in /usr/share/applications/
+  - unity: # Unity specific (e.g. 'running-apps', 'expo-icon' or 'devices').
 ```
 
 Example Playbooks
