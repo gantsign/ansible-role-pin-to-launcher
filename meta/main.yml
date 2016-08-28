@@ -7,11 +7,11 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-    - trusty
     - wily
-    - xenial
   galaxy_tags:
     - dockbar
     - dockbarx
     - launcher
+    - ubuntu
+    - unity
 dependencies: []
