@@ -18,11 +18,20 @@
         - application: test-app.desktop
         - application: test-app2.desktop
           application_id: test-id
+        - application: ''
+        - application: "{{ None }}"
+        - application: "{{ omit }}"
         - {}
     - role: ansible-role-pin-to-launcher
       pin_to_launcher: unity
       pin_to_launcher_favorites:
         - application: test-app3.desktop
         - application: test-app4.desktop
+        - application: ''
+        - application: "{{ None }}"
+        - application: "{{ omit }}"
         - unity: running-apps
+        - unity: ''
+        - unity: "{{ None }}"
+        - unity: "{{ omit }}"
         - {}
