@@ -1,7 +1,7 @@
 def test_dockbarx_config(Command):
     # Need to -set-home when using sudo for gconftool-2 to work
     output = Command.check_output("sudo --user=test_usr --set-home gconftool-2 --get /apps/dockbarx/launchers")
-    assert output == '[test-app;/usr/share/applications/test-app.desktop,test-app2;/usr/share/applications/test-app2.desktop]'
+    assert output == '[test-app;/usr/share/applications/test-app.desktop,test-id;/usr/share/applications/test-app2.desktop]'
 
 def test_unity_config(File):
     config_file = File('/usr/share/glib-2.0/schemas/20_ansible_launcher.gschema.override')

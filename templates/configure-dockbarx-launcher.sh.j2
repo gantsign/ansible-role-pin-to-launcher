@@ -8,7 +8,8 @@ new_launchers="[{#
 #}{% for favourite in pin_to_launcher_favorites %}{#
     #}{% if favourite.application is defined %}{#
         #}{% if not first_app %},{% endif %}{% set first_app = False %}{#
-        #}{{ favourite.application | regex_replace('(.*)\\.desktop$', '\\1') }}{#
+        #}{% set default_application_id = favourite.application | regex_replace('(.*)\\.desktop$', '\\1') %}{#
+        #}{{ favourite.application_id | default(default_application_id) }}{#
         #};/usr/share/applications/{{ favourite.application }}{#
     #}{% endif %}{#
 #}{% endfor %}]"
