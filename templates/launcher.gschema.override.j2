@@ -6,12 +6,12 @@
 favorites = [{#
 #}{% for favourite in pin_to_launcher_favorites %}{#
 
-    #}{% if favourite.application is defined %}{#
+    #}{% if favourite.application is defined and favourite.application not in ('', None, omit) %}{#
         #}{% if not first_fav %}, {% endif %}{% set first_fav = False %}{#
         #}'application://{{ favourite.application }}'{#
     #}{% endif %}{#
 
-    #}{% if favourite.unity is defined %}{#
+    #}{% if favourite.unity is defined and favourite.unity not in ('', None, omit) %}{#
         #}{% if not first_fav %}, {% endif %}{% set first_fav = False %}{#
         #}'unity://{{ favourite.unity }}'{#
     #}{% endif %}{#
