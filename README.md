@@ -120,7 +120,8 @@ use this you have to [install DockbarX first](https://github.com/M7S/dockbarx).
 More Roles From GantSign
 ------------------------
 
-You can find more roles from GantSign on [Ansible Galaxy](https://galaxy.ansible.com/gantsign).
+You can find more roles from GantSign on
+[Ansible Galaxy](https://galaxy.ansible.com/gantsign).
 
 Development & Testing
 ---------------------
