@@ -7,10 +7,12 @@
 new_launchers="[{#
 #}{% for favourite in pin_to_launcher_favorites %}{#
     #}{% if favourite.application is defined and favourite.application not in ('', None, omit) %}{#
-        #}{% if not first_app %},{% endif %}{% set first_app = False %}{#
-        #}{% set default_application_id = favourite.application | regex_replace('(.*)\\.desktop$', '\\1') %}{#
-        #}{{ favourite.application_id | default(default_application_id) }}{#
-        #};/usr/share/applications/{{ favourite.application }}{#
+        #}{% if not favourite.when_desktop is defined or favourite.when_desktop == 'dockbarx' %}{#
+            #}{% if not first_app %},{% endif %}{% set first_app = False %}{#
+            #}{% set default_application_id = favourite.application | regex_replace('(.*)\\.desktop$', '\\1') %}{#
+            #}{{ favourite.application_id | default(default_application_id) }}{#
+            #};/usr/share/applications/{{ favourite.application }}{#
+        #}{% endif %}{#
     #}{% endif %}{#
 #}{% endfor %}]"
 
