@@ -49,7 +49,8 @@ Favorites are specified as follows:
 pin_to_launcher_favorites:
   - application: # The file name of a .desktop file in /usr/share/applications/
     application_id: # DockbarX specific (StartupWMClass or executable file name)
-  - unity: # Unity specific (e.g. 'running-apps', 'expo-icon' or 'devices').
+    when_desktop: # If specified, only install if the desktop matches this value
+  - unity: # Unity specific (e.g. 'running-apps', 'expo-icon' or 'devices')
 ```
 
 Example Playbooks
@@ -67,6 +68,7 @@ Unity is the default desktop on Ubuntu.
       pin_to_launcher_favorites:
         # You'll probably need these apps pinned when using Unity.
         - application: 'ubiquity.desktop' # The application search/menu
+          when_desktop: unity
         - application: 'org.gnome.Nautilus.desktop' # The file browser
         # The following two apps are less frequently used so you may want to put
         # them below your other apps.
@@ -115,6 +117,7 @@ use this you have to [install DockbarX first](https://github.com/M7S/dockbarx).
           # (if one is present in the `.desktop` file), or the file name of the
           # application executable.
           application_id: Thunar
+          when_desktop: dockbarx
 ```
 
 More Roles From GantSign
