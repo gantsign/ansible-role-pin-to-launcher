@@ -14,4 +14,4 @@
     group: root
     mode: 'u=rw,go=r'
   notify:
-    - compile glib schemas pin_to_launcher
+    - compile glib schemas
