@@ -13,5 +13,9 @@
     owner: root
     group: root
     mode: 'u=rw,go=r'
-  notify:
-    - compile glib schemas
+  register: launcher_config
+
+- name: apply glib schemas changes
+  become: yes
+  command: "/usr/bin/glib-compile-schemas {{ pin_to_launcher_glib_schemas_directory }}"
+  when: launcher_config.changed

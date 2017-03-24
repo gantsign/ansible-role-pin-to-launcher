@@ -1,4 +1,2 @@
 ---
-- name: compile glib schemas
-  become: yes
-  command: '/usr/bin/glib-compile-schemas {{ pin_to_launcher_glib_schemas_directory }}'
+# handlers file for pin-to-launcher
