@@ -16,6 +16,11 @@
   register: launcher_config
 
 - name: apply glib schemas changes
+  tags:
+    # Suppress warning: [ANSIBLE0016] Tasks that run when changed should likely be handlers
+    # Since the command is invoked with an argument that is role specific it
+    # doesn't make sense to use a handler, which are global to the playbook.
+    - skip_ansible_lint
   become: yes
   command: "/usr/bin/glib-compile-schemas {{ pin_to_launcher_glib_schemas_directory }}"
   when: launcher_config.changed
