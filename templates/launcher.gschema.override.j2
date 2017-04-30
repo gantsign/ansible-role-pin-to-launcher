@@ -2,20 +2,4 @@
 
 {% set first_fav = True %}
 [com.canonical.Unity.Launcher]
-{# Using comments to suppress whitespace #}
-favorites = [{#
-#}{% for favourite in pin_to_launcher_favorites %}{#
-
-    #}{% if favourite.application is defined and favourite.application not in ('', None, omit) %}{#
-        #}{% if not favourite.when_desktop is defined or favourite.when_desktop == 'unity' %}{#
-            #}{% if not first_fav %}, {% endif %}{% set first_fav = False %}{#
-            #}'application://{{ favourite.application }}'{#
-        #}{% endif %}{#
-    #}{% endif %}{#
-
-    #}{% if favourite.unity is defined and favourite.unity not in ('', None, omit) %}{#
-        #}{% if not first_fav %}, {% endif %}{% set first_fav = False %}{#
-        #}'unity://{{ favourite.unity }}'{#
-    #}{% endif %}{#
-
-#}{% endfor %}]
+favorites = [{{ pin_to_launcher_favorites | to_unity_items | join(', ') }}]

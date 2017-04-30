@@ -2,19 +2,7 @@
 
 # {{ ansible_managed }}
 
-{% set first_app = True %}
-{# Using comments to suppress whitespace #}
-new_launchers="[{#
-#}{% for favourite in pin_to_launcher_favorites %}{#
-    #}{% if favourite.application is defined and favourite.application not in ('', None, omit) %}{#
-        #}{% if not favourite.when_desktop is defined or favourite.when_desktop == 'dockbarx' %}{#
-            #}{% if not first_app %},{% endif %}{% set first_app = False %}{#
-            #}{% set default_application_id = favourite.application | regex_replace('(.*)\\.desktop$', '\\1') %}{#
-            #}{{ favourite.application_id | default(default_application_id) }}{#
-            #};/usr/share/applications/{{ favourite.application }}{#
-        #}{% endif %}{#
-    #}{% endif %}{#
-#}{% endfor %}]"
+new_launchers="[{{ pin_to_launcher_favorites | to_dockbarx_items | join(',') }}]"
 
 # Get the current list of pinned applications
 existing_launchers=$(gconftool-2 --direct \
