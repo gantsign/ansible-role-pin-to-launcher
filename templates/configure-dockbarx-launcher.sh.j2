@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# {{ ansible_managed }}
+{{ ansible_managed | comment }}
 
 new_launchers="[{{ pin_to_launcher_favorites | to_dockbarx_items | join(',') }}]"
 
