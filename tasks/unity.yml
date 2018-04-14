@@ -9,7 +9,7 @@
   become: yes
   template:
     src: launcher.gschema.override.j2
-    dest: "{{ pin_to_launcher_glib_schemas_directory }}/20_ansible_launcher.gschema.override"
+    dest: '{{ pin_to_launcher_glib_schemas_directory }}/20_ansible_launcher.gschema.override'
     owner: root
     group: root
     mode: 'u=rw,go=r'
@@ -22,5 +22,5 @@
     # doesn't make sense to use a handler, which are global to the playbook.
     - skip_ansible_lint
   become: yes
-  command: "/usr/bin/glib-compile-schemas {{ pin_to_launcher_glib_schemas_directory }}"
+  command: '/usr/bin/glib-compile-schemas {{ pin_to_launcher_glib_schemas_directory }}'
   when: launcher_config.changed

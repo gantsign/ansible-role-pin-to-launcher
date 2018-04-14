@@ -8,7 +8,7 @@
 - name: create tmp dir
   become: yes
   file:
-    path: "{{ pin_to_launcher_tmp_dir }}"
+    path: '{{ pin_to_launcher_tmp_dir }}'
     state: directory
     owner: root
     group: root
@@ -18,14 +18,14 @@
   become: yes
   template:
     src: configure-dockbarx-launcher.sh.j2
-    dest: "{{ pin_to_launcher_dockbarx_configuration_script }}"
+    dest: '{{ pin_to_launcher_dockbarx_configuration_script }}'
     owner: root
     group: root
     mode: 'u=rwx,go='
 
 - name: apply dockbarx configuration
   become: yes
-  command: "{{ pin_to_launcher_dockbarx_configuration_script }}"
+  command: '{{ pin_to_launcher_dockbarx_configuration_script }}'
   register: dockbarx_result
   changed_when: 'dockbarx_result.rc == 0'
   failed_when: 'dockbarx_result.rc >= 2'

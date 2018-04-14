@@ -22,8 +22,8 @@
         - application: test-app3.desktop
           when_desktop: unity
         - application: ''
-        - application: "{{ None }}"
-        - application: "{{ omit }}"
+        - application: '{{ None }}'
+        - application: '{{ omit }}'
         - {}
     - role: ansible-role-pin-to-launcher
       pin_to_launcher: unity
@@ -34,10 +34,10 @@
         - application: test-app5.desktop
           when_desktop: dockbarx
         - application: ''
-        - application: "{{ None }}"
-        - application: "{{ omit }}"
+        - application: '{{ None }}'
+        - application: '{{ omit }}'
         - unity: running-apps
         - unity: ''
-        - unity: "{{ None }}"
-        - unity: "{{ omit }}"
+        - unity: '{{ None }}'
+        - unity: '{{ omit }}'
         - {}
