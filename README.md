@@ -19,6 +19,10 @@ Requirements
 
 * A supported launcher
 
+    * [Gnome](https://www.gnome.org)
+
+        * The default desktop installed with Ubuntu from Bionic (18.04).
+
     * [Unity](https://en.wikipedia.org/wiki/Unity_(user_interface))
 
         * The default desktop installed with Ubuntu prior to Bionic (18.04).
@@ -36,7 +40,7 @@ are shown below):
 
 ```yaml
 # The desktop application launcher to pin applications to:
-# (currently supported: 'unity', dockbarx')
+# (currently supported: 'gnome', 'unity', dockbarx')
 pin_to_launcher: unity
 
 # The favorite applications to pin
@@ -55,6 +59,31 @@ pin_to_launcher_favorites:
 
 Example Playbooks
 -----------------
+
+### Example Gnome Playbook
+
+Gnome is the default desktop on Ubuntu from Bionic (18.04).
+
+```yaml
+- hosts: servers
+  roles:
+    - role: gantsign.pin-to-launcher
+      pin_to_launcher: gnome
+      pin_to_launcher_favorites:
+        # You'll probably need these apps pinned when using Gnome.
+        - application: 'ubiquity.desktop' # The application search/menu
+          when_desktop: gnome
+        - application: 'org.gnome.Nautilus.desktop' # The file browser
+          when_desktop: gnome
+        # Pin the applications of your choice below.
+        #
+        # Tip: run `gsettings get org.gnome.shell favorite-apps` to
+        # see the apps you currently have pinned.
+        - application: 'firefox.desktop'
+        - application: 'thunderbird.desktop'
+        - application: 'rhythmbox.desktop'
+        - application: 'libreoffice-writer.desktop'
+```
 
 ### Example Unity Playbook
 

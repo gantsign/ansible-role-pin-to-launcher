@@ -1,0 +1,26 @@
+---
+- name: install libglib2.0-bin
+  become: yes
+  apt:
+    name: libglib2.0-bin
+    state: present
+
+- name: write Gnome favorite-apps config
+  become: yes
+  template:
+    src: favorite_apps.gschema.override.j2
+    dest: '{{ pin_to_launcher_glib_schemas_directory }}/20_ansible_favorite_apps.gschema.override'
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+  register: favorite_apps_config
+
+- name: apply glib schemas changes
+  tags:
+    # Suppress warning: [ANSIBLE0016] Tasks that run when changed should likely be handlers
+    # Since the command is invoked with an argument that is role specific it
+    # doesn't make sense to use a handler, which are global to the playbook.
+    - skip_ansible_lint
+  become: yes
+  command: '/usr/bin/glib-compile-schemas {{ pin_to_launcher_glib_schemas_directory }}'
+  when: favorite_apps_config.changed
