@@ -5,8 +5,4 @@
     that:
       - "pin_to_launcher in ('dockbarx', 'unity')"
 
-- include: dockbarx.yml
-  when: pin_to_launcher == 'dockbarx'
-
-- include: unity.yml
-  when: pin_to_launcher == 'unity'
+- include_tasks: '{{ pin_to_launcher }}.yml'
