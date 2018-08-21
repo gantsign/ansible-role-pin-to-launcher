@@ -24,7 +24,7 @@ def test_unity_config(host):
     assert config_file.is_file
     assert config_file.user == 'root'
     assert config_file.group == 'root'
-    assert oct(config_file.mode) == '0644'
+    assert config_file.mode == 0o644
 
     # File.contains uses grep
     favorites = ['application://test-app3.desktop',
