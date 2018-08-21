@@ -19,7 +19,7 @@ Requirements
 
 * A supported launcher
 
-    * [Unity](https://unity.ubuntu.com/)
+    * [Unity](https://en.wikipedia.org/wiki/Unity_(user_interface))
 
         * The default desktop installed with Ubuntu.
 
