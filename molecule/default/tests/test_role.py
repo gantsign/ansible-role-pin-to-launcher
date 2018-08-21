@@ -6,19 +6,19 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_dockbarx_config(Command):
+def test_dockbarx_config(host):
     # Need to -set-home when using sudo for gconftool-2 to work
-    output = Command.check_output("sudo %s --set-home gconftool-2 --get %s",
-                                  "--user=test_usr",
-                                  "/apps/dockbarx/launchers")
+    output = host.check_output("sudo %s --set-home gconftool-2 --get %s",
+                               "--user=test_usr",
+                               "/apps/dockbarx/launchers")
     launchers = ['test-app;/usr/share/applications/test-app.desktop',
                  'test-id;/usr/share/applications/test-app2.desktop']
     assert output == '[' + ','.join(launchers) + ']'
 
 
-def test_unity_config(File):
+def test_unity_config(host):
     path = '/usr/share/glib-2.0/schemas/20_ansible_launcher.gschema.override'
-    config_file = File(path)
+    config_file = host.file(path)
 
     assert config_file.exists
     assert config_file.is_file
