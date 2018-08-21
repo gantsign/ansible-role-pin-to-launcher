@@ -58,7 +58,7 @@ Example Playbooks
 
 ### Example Unity Playbook
 
-Unity is the default desktop on Ubuntu.
+Unity was the default desktop on Ubuntu prior to Bionic (18.04).
 
 ```yaml
 - hosts: servers
