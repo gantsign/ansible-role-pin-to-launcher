@@ -21,7 +21,7 @@ Requirements
 
     * [Unity](https://en.wikipedia.org/wiki/Unity_(user_interface))
 
-        * The default desktop installed with Ubuntu.
+        * The default desktop installed with Ubuntu prior to Bionic (18.04).
 
     * [DockbarX](https://github.com/M7S/dockbarx)
 
