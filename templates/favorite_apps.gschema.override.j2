@@ -1,0 +1,4 @@
+{{ ansible_managed | comment }}
+
+[org.gnome.shell]
+favorite-apps = [ {{ pin_to_launcher_favorites | to_gnome_items | join(', ') }} ]
