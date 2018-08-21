@@ -1,5 +1,4 @@
 {{ ansible_managed | comment }}
 
-{% set first_fav = True %}
 [com.canonical.Unity.Launcher]
 favorites = [{{ pin_to_launcher_favorites | to_unity_items | join(', ') }}]
