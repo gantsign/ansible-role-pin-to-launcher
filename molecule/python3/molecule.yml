@@ -9,18 +9,24 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-pin-to-launcher-default
+  - name: ansible-role-pin-to-launcher-python3
     image: ubuntu:16.04
 
 provisioner:
   name: ansible
+  options:
+    extra-vars:
+      ansible_python_interpreter: /usr/bin/python3
+  playbooks:
+    converge: ../default/playbook.yml
   lint:
     name: ansible-lint
 
 scenario:
-  name: default
+  name: python3
 
 verifier:
   name: testinfra
+  directory: ../default/tests/
   lint:
     name: flake8
