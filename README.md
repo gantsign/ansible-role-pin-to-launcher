@@ -10,7 +10,7 @@ Role to pin applications to the desktop application launcher.
 Requirements
 ------------
 
-* Ansible >= 2.7
+* Ansible >= 2.8
 
 * Ubuntu
 
