@@ -1,7 +1,7 @@
 Ansible Role: Pin to Launcher
 =============================
 
-[![Build Status](https://travis-ci.org/gantsign/ansible-role-pin-to-launcher.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-pin-to-launcher)
+[![Build Status](https://travis-ci.com/gantsign/ansible-role-pin-to-launcher.svg?branch=master)](https://travis-ci.com/gantsign/ansible-role-pin-to-launcher)
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.pin--to--launcher-blue.svg)](https://galaxy.ansible.com/gantsign/pin-to-launcher)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-pin-to-launcher/master/LICENSE)
 
