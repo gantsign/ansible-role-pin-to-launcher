@@ -22,8 +22,12 @@ def to_dockbarx_items(context, pin_to_launcher_favorites):
             if when_desktop in ('dockbarx', None):
                 application_id = favourite.get('application_id')
                 if application_id is None:
-                    application_id = re.sub('(.*)\\.desktop$', '\\1', application)
-                launcher_items.append(application_id + ';/usr/share/applications/' + application)
+                    application_id = re.sub(
+                        '(.*)\\.desktop$', '\\1', application)
+                launcher_items.append(
+                    application_id +
+                    ';/usr/share/applications/' +
+                    application)
 
     return launcher_items
 
