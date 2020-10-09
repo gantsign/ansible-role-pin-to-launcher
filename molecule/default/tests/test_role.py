@@ -1,11 +1,3 @@
-import os
-
-import testinfra.utils.ansible_runner
-
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
-
-
 def test_dockbarx_config(host):
     # Need to -set-home when using sudo for gconftool-2 to work
     output = host.check_output("sudo %s --set-home gconftool-2 --get %s",
