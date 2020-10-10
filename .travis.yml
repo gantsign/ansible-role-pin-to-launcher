@@ -1,22 +1,14 @@
 ---
 language: python
+python: '3.6'
 
 env:
   global:
     - MOLECULEW_USE_SYSTEM=true
-
-# Spin off separate builds for each of the following versions
-# of Ansible and Linux.
-jobs:
-  include:
-    - env:
-        - MOLECULEW_ANSIBLE=2.8.16
-        - MOLECULE_SCENARIO=default
-      python: '2.7'
-    - env:
-        - MOLECULEW_ANSIBLE=2.9.1
-        - MOLECULE_SCENARIO=python3
-      python: '3.6'
+  matrix:
+    # Spin off separate builds for each of the following versions of Ansible
+    - MOLECULEW_ANSIBLE=2.8.16
+    - MOLECULEW_ANSIBLE=2.9.1
 
 # Require Ubuntu 16.04
 dist: xenial
@@ -33,7 +25,7 @@ install:
   - ./moleculew wrapper-versions
 
 script:
-  - ./moleculew test --scenario-name=$MOLECULE_SCENARIO
+  - ./moleculew test
 
 branches:
   only:
