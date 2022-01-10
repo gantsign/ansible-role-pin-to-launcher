@@ -1,3 +1,7 @@
 ---
+# The desktop application launcher to pin applications to:
+# (currently supported: 'gnome')
+pin_to_launcher: gnome
+
 # Directory where GLib schemas are located
 pin_to_launcher_glib_schemas_directory: /usr/share/glib-2.0/schemas

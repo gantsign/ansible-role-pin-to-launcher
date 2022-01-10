@@ -23,11 +23,6 @@ Requirements
 
         * The default desktop installed with Ubuntu from Bionic (18.04).
 
-    * [DockbarX](https://github.com/M7S/dockbarx)
-
-        * An optional install that's compatible with the
-          [XUbuntu](http://xubuntu.org/)/[Xfce4](https://www.xfce.org/) desktop.
-
 Role Variables
 --------------
 
@@ -35,10 +30,6 @@ The following variables will change the behavior of this role (default values
 are shown below):
 
 ```yaml
-# The desktop application launcher to pin applications to:
-# (currently supported: 'gnome', 'dockbarx')
-pin_to_launcher: gnome
-
 # The favorite applications to pin
 pin_to_launcher_favorites: []
 ```
@@ -48,16 +39,10 @@ Favorites are specified as follows:
 ```yaml
 pin_to_launcher_favorites:
   - application: # The file name of a .desktop file in /usr/share/applications/
-    application_id: # DockbarX specific (StartupWMClass or executable file name)
-    when_desktop: # If specified, only install if the desktop matches this value
 ```
 
-Example Playbooks
------------------
-
-### Example Gnome Playbook
-
-Gnome is the default desktop on Ubuntu from Bionic (18.04).
+Example Playbook
+----------------
 
 ```yaml
 - hosts: servers
@@ -67,9 +52,7 @@ Gnome is the default desktop on Ubuntu from Bionic (18.04).
       pin_to_launcher_favorites:
         # You'll probably need these apps pinned when using Gnome.
         - application: 'ubiquity.desktop' # The application search/menu
-          when_desktop: gnome
         - application: 'org.gnome.Nautilus.desktop' # The file browser
-          when_desktop: gnome
         # Pin the applications of your choice below.
         #
         # Tip: run `gsettings get org.gnome.shell favorite-apps` to
@@ -78,32 +61,6 @@ Gnome is the default desktop on Ubuntu from Bionic (18.04).
         - application: 'thunderbird.desktop'
         - application: 'rhythmbox.desktop'
         - application: 'libreoffice-writer.desktop'
-```
-
-### Example DockbarX Playbook
-
-DockbarX is a popular dockbar that has integration with the Xfce4 desktop. To
-use this you have to [install DockbarX first](https://github.com/M7S/dockbarx).
-
-```yaml
-- hosts: servers
-  roles:
-    - role: gantsign.pin-to-launcher
-      pin_to_launcher: dockbarx
-      pin_to_launcher_favorites:
-        # There are no applications pinned by default with DockbarX, so add
-        # whatever apps you want here.
-        #
-        # Tip: run `gconftool-2 --get /apps/dockbarx/launchers` to see what apps
-        # you currently have pinned.
-        - application: exo-terminal-emulator.desktop
-        - application: Thunar-folder-handler.desktop
-          # If your application isn't grouped with its launcher it may help to
-          # specify the `application_id`; this is either the `StartupWMClass`
-          # (if one is present in the `.desktop` file), or the file name of the
-          # application executable.
-          application_id: Thunar
-          when_desktop: dockbarx
 ```
 
 More Roles From GantSign

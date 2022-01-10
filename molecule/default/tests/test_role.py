@@ -1,13 +1,3 @@
-def test_dockbarx_config(host):
-    # Need to -set-home when using sudo for gconftool-2 to work
-    output = host.check_output("sudo %s --set-home gconftool-2 --get %s",
-                               "--user=test_usr",
-                               "/apps/dockbarx/launchers")
-    launchers = ['test-app;/usr/share/applications/test-app.desktop',
-                 'test-id;/usr/share/applications/test-app2.desktop']
-    assert output == '[' + ','.join(launchers) + ']'
-
-
 def test_gnome_config(host):
     path = ('/usr/share/glib-2.0/schemas/'
             '20_ansible_favorite_apps.gschema.override')

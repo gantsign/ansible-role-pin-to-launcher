@@ -18,26 +18,10 @@
 
   roles:
     - role: ansible-role-pin-to-launcher
-      pin_to_launcher: dockbarx
-      pin_to_launcher_favorites:
-        - application: test-app.desktop
-        - application: test-app2.desktop
-          application_id: test-id
-          when_desktop: dockbarx
-        - application: test-app4.desktop
-          when_desktop: gnome
-        - application: ''
-        - application: '{{ None }}'
-        - application: '{{ omit }}'
-        - {}
-    - role: ansible-role-pin-to-launcher
       pin_to_launcher: gnome
       pin_to_launcher_favorites:
         - application: test-app3.desktop
-        - application: test-app5.desktop
-          when_desktop: dockbarx
         - application: test-app6.desktop
-          when_desktop: gnome
         - application: ''
         - application: '{{ None }}'
         - application: '{{ omit }}'
