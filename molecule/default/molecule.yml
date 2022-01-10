@@ -12,8 +12,10 @@ lint: |
   flake8
 
 platforms:
-  - name: ansible-role-pin-to-launcher-default
-    image: ubuntu:16.04
+  - name: ansible-role-pin-to-launcher-ubuntu-min
+    image: ubuntu:18.04
+  - name: ansible-role-pin-to-launcher-ubuntu-max
+    image: ubuntu:20.04
 
 provisioner:
   name: ansible
