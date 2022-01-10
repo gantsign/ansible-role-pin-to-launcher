@@ -14,5 +14,5 @@ galaxy_info:
     - dockbarx
     - launcher
     - ubuntu
-    - unity
+    - gnome
 dependencies: []

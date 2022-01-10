@@ -3,6 +3,6 @@
 - name: assert launcher in supported list
   assert:
     that:
-      - "pin_to_launcher in ('dockbarx', 'gnome', 'unity')"
+      - "pin_to_launcher in ('dockbarx', 'gnome')"
 
 - include_tasks: '{{ pin_to_launcher }}.yml'
