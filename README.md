@@ -23,10 +23,6 @@ Requirements
 
         * The default desktop installed with Ubuntu from Bionic (18.04).
 
-    * [Unity](https://en.wikipedia.org/wiki/Unity_(user_interface))
-
-        * The default desktop installed with Ubuntu prior to Bionic (18.04).
-
     * [DockbarX](https://github.com/M7S/dockbarx)
 
         * An optional install that's compatible with the
@@ -40,8 +36,8 @@ are shown below):
 
 ```yaml
 # The desktop application launcher to pin applications to:
-# (currently supported: 'gnome', 'unity', dockbarx')
-pin_to_launcher: unity
+# (currently supported: 'gnome', 'dockbarx')
+pin_to_launcher: gnome
 
 # The favorite applications to pin
 pin_to_launcher_favorites: []
@@ -54,7 +50,6 @@ pin_to_launcher_favorites:
   - application: # The file name of a .desktop file in /usr/share/applications/
     application_id: # DockbarX specific (StartupWMClass or executable file name)
     when_desktop: # If specified, only install if the desktop matches this value
-  - unity: # Unity specific (e.g. 'running-apps', 'expo-icon' or 'devices')
 ```
 
 Example Playbooks
@@ -83,44 +78,6 @@ Gnome is the default desktop on Ubuntu from Bionic (18.04).
         - application: 'thunderbird.desktop'
         - application: 'rhythmbox.desktop'
         - application: 'libreoffice-writer.desktop'
-```
-
-### Example Unity Playbook
-
-Unity was the default desktop on Ubuntu prior to Bionic (18.04).
-
-```yaml
-- hosts: servers
-  roles:
-    - role: gantsign.pin-to-launcher
-      pin_to_launcher: unity
-      pin_to_launcher_favorites:
-        # You'll probably need these apps pinned when using Unity.
-        - application: 'ubiquity.desktop' # The application search/menu
-          when_desktop: unity
-        - application: 'org.gnome.Nautilus.desktop' # The file browser
-        # The following two apps are less frequently used so you may want to put
-        # them below your other apps.
-        - application: 'ubuntu-software-center.desktop' # Ubuntu software center
-        - application: 'unity-control-center.desktop' # System settings
-
-        # Pin the applications of your choice below.
-        #
-        # Tip: run `gsettings get com.canonical.Unity.Launcher favorites` to
-        # see the apps you currently have pinned.
-        - application: google-chrome.desktop
-
-        # The 'unity' favorites are not apps as such, but are placeholders in
-        # the Ubuntu launcher.
-        #
-        # You can reorder the items below, but be don't omit them unless you
-        # know what you're doing.
-        #
-        # These can be omitted if you're using DockbarX, but they'll be ignored
-        # anyway.
-        - unity: running-apps
-        - unity: expo-icon
-        - unity: devices
 ```
 
 ### Example DockbarX Playbook
